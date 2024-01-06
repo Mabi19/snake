@@ -1,0 +1,26 @@
+#playfield {
+    display: flex;
+    flex-flow: column nowrap;
+    border: 1px solid black;
+    --playfield-width: 800px;
+    max-width: var(--playfield-width);
+}
+
+.table-row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+.table-cell {
+    min-width: 8px;
+    width: calc(var(--playfield-width) / var(--board-width));
+    max-width: 32px;
+    aspect-ratio: 1;
+    background-color: lightskyblue;
+    border: 1px solid black;
+}
+
+.snake {
+    background-color: blue;
+}
