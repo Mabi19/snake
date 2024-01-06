@@ -56,7 +56,9 @@ export class TableRenderer {
             }
         }
 
-        this.lastSnake = snake;
+        // copy to not override stuff
+        this.lastSnake = snake.slice(0);
+        console.assert(this.lastSnake != snake);
         this.lastFruit = fruit;
     }
 }
