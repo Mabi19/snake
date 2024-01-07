@@ -6,6 +6,7 @@ let snake: Vector[] = [];
 let direction = new Vector(0, 0);
 let directionBuffer: Vector[] = [];
 let fruit: Vector[] = [];
+let gameActive = false;
 
 export function setup(renderer: TableRenderer) {
     snake = [new Vector(2, 0), new Vector(1, 0), new Vector(0, 0)];
@@ -16,6 +17,8 @@ export function setup(renderer: TableRenderer) {
 
     // initial render
     renderer.render(snake, fruit);
+
+    gameActive = true;
 }
 
 export function handleInput(ev: KeyboardEvent) {
@@ -81,7 +84,16 @@ function spawnFruit() {
     }
 }
 
+function gameOver() {
+    gameActive = false;
+}
+
 export function runTick(renderer: TableRenderer) {
+    // do nothing when the game is off
+    if (!gameActive) {
+        return;
+    }
+
     // process inputs
     if (directionBuffer.length > 0) {
         direction = directionBuffer.shift()!;
@@ -94,6 +106,12 @@ export function runTick(renderer: TableRenderer) {
 
     // add head and remove tail
     const newHead = snake[0].add(direction);
+
+    if (vectorInArray(snake, newHead)) {
+        gameOver();
+        return;
+    }
+
     snake.unshift(newHead);
     if (!vectorInArray(fruit, newHead)) {
         snake.pop();
