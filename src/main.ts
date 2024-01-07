@@ -4,9 +4,10 @@ import { settings } from "./settings";
 import { handleInput, runTick, setup } from "./game";
 
 // TODO:
+// - collision
 // - grace move
-// - fruit
-// - dynamic game settings
+// - customization: outside walls, fruit count, board size, tick speed
+// - scoring, high scores (yoink confetti effect)
 
 let lastTick = performance.now();
 
