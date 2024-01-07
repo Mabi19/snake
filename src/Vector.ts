@@ -12,3 +12,7 @@ export class Vector {
         return new Vector(this.x + other.x, this.y + other.y);
     }
 }
+
+export function vectorInArray(arr: Vector[], vec: Vector) {
+    return arr.find(({ x, y }) => vec.x == x && vec.y == y) !== undefined;
+}

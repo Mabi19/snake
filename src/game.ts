@@ -1,5 +1,5 @@
 import { TableRenderer } from "./Renderer";
-import { Vector } from "./Vector";
+import { Vector, vectorInArray } from "./Vector";
 import { settings } from "./settings";
 
 let snake: Vector[] = [];
@@ -66,8 +66,9 @@ function spawnFruit() {
     const freeTiles = [];
     for (let testX = 0; testX < settings.boardSize.x; testX++) {
         for (let testY = 0; testY < settings.boardSize.y; testY++) {
-            if (!takenTiles.find(({ x, y }) => testX == x && testY == y)) {
-                freeTiles.push(new Vector(testX, testY));
+            const pos = new Vector(testX, testY);
+            if (!vectorInArray(takenTiles, pos)) {
+                freeTiles.push(pos);
             }
         }
     }
@@ -94,7 +95,13 @@ export function runTick(renderer: TableRenderer) {
     // add head and remove tail
     const newHead = snake[0].add(direction);
     snake.unshift(newHead);
-    snake.pop();
+    if (!vectorInArray(fruit, newHead)) {
+        snake.pop();
+    } else {
+        // delete the fruit
+        fruit = fruit.filter((pos) => !(pos.x == newHead.x && pos.y == newHead.y));
+        spawnFruit();
+    }
 
     renderer.render(snake, fruit);
 }
