@@ -47,28 +47,30 @@ export function handleInput(ev: KeyboardEvent) {
     switch (ev.key.toLowerCase()) {
         case "arrowleft":
         case "a":
-            if (lastDir.x != 1) {
+            if (lastDir.x != 1 && lastDir.x != -1) {
                 directionBuffer.push(new Vector(-1, 0));
             }
             break;
         case "arrowup":
         case "w":
-            if (lastDir.y != 1) {
+            if (lastDir.y != 1 && lastDir.y != -1) {
                 directionBuffer.push(new Vector(0, -1));
             }
             break;
         case "arrowright":
         case "d":
-            if (lastDir.x != -1) {
+            if (lastDir.x != -1 && lastDir.x != 1) {
                 directionBuffer.push(new Vector(1, 0));
                 break;
             }
             break;
         case "arrowdown":
         case "s":
-            if (lastDir.y != -1) {
+            if (lastDir.y != -1 && lastDir.y != 1) {
                 directionBuffer.push(new Vector(0, 1));
             }
             break;
     }
+
+    document.querySelector("#debug")!.textContent = JSON.stringify(directionBuffer);
 }
