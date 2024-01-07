@@ -57,7 +57,7 @@ window.addEventListener("keydown", (ev) => {
 
     // only allow buffering 1 input
     if (directionBuffer.length >= 2) {
-        return;
+        directionBuffer.pop();
     }
 
     const lastDir = directionBuffer.at(-1) ?? direction;
