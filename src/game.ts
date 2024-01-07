@@ -1,5 +1,6 @@
 import { TableRenderer } from "./Renderer";
 import { Vector, vectorInArray } from "./Vector";
+import { controls } from "./controls";
 import { settings } from "./settings";
 
 let snake: Vector[] = [];
@@ -19,6 +20,7 @@ export function setup(renderer: TableRenderer) {
     renderer.render(snake, fruit);
 
     gameActive = true;
+    controls.setActive(!gameActive);
 }
 
 export function handleInput(ev: KeyboardEvent) {
@@ -86,6 +88,7 @@ function spawnFruit() {
 
 function gameOver() {
     gameActive = false;
+    controls.setActive(!gameActive);
 }
 
 export function runTick(renderer: TableRenderer) {
