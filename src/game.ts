@@ -15,7 +15,7 @@ export function setup(renderer: TableRenderer) {
     spawnFruit();
 
     // initial render
-    renderer.render(snake, []);
+    renderer.render(snake, fruit);
 }
 
 export function handleInput(ev: KeyboardEvent) {
@@ -72,7 +72,7 @@ function spawnFruit() {
         }
     }
     // When there are not enough tiles to spawn fruit, don't spawn it.
-    const fruitToSpawn = Math.max(settings.fruitCount - fruit.length, freeTiles.length);
+    const fruitToSpawn = Math.min(settings.fruitCount - fruit.length, freeTiles.length);
     for (let i = 0; i < fruitToSpawn; i++) {
         const tileIndex = Math.floor(Math.random() * freeTiles.length);
         const [tile] = freeTiles.splice(tileIndex, 1);
@@ -96,5 +96,5 @@ export function runTick(renderer: TableRenderer) {
     snake.unshift(newHead);
     snake.pop();
 
-    renderer.render(snake, []);
+    renderer.render(snake, fruit);
 }
