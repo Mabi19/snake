@@ -2,6 +2,12 @@ import "./style.css";
 import { TableRenderer } from "./Renderer";
 import { Vector } from "./Vector";
 
+// TODO:
+// - grace move
+// - input buffering
+// - fruit
+// - dynamic game settings
+
 const TICK_LENGTH = 250;
 let lastTick = performance.now();
 
