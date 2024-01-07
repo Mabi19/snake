@@ -17,9 +17,13 @@
     width: calc(var(--playfield-width) / var(--board-width));
     max-width: 32px;
     aspect-ratio: 1;
-    background-color: lightskyblue;
+    background-color: paleturquoise;
 }
 
 .snake {
-    background-color: blue;
+    background-color: limegreen;
+}
+
+.head {
+    background-color: green;
 }

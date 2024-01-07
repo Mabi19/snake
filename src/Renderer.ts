@@ -45,15 +45,23 @@ export class TableRenderer {
         if (this.lastSnake.length == snake.length) {
             const removeCell = this.lastSnake[this.lastSnake.length - 1];
             this.cells[removeCell.y][removeCell.x].classList.remove("snake");
+            const notHeadAnymore = this.lastSnake[0];
+            this.cells[notHeadAnymore.y][notHeadAnymore.x].classList.remove("head");
+            this.cells[notHeadAnymore.y][notHeadAnymore.x].classList.add("snake");
+
             const newCell = snake[0];
-            this.cells[newCell.y][newCell.x].classList.add("snake");
+            this.cells[newCell.y][newCell.x].classList.add("head");
         } else {
             for (const oldSnakePiece of this.lastSnake) {
-                this.cells[oldSnakePiece.y][oldSnakePiece.x].classList.remove("snake");
+                const piece = this.cells[oldSnakePiece.y][oldSnakePiece.x];
+                piece.classList.remove("snake");
+                piece.classList.remove("head");
             }
-            for (const newSnakePiece of snake) {
+            for (const newSnakePiece of snake.slice(1)) {
                 this.cells[newSnakePiece.y][newSnakePiece.x].classList.add("snake");
             }
+            const head = snake[0];
+            this.cells[head.y][head.x].classList.add("head");
         }
 
         // copy to not override stuff
