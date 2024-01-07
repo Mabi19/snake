@@ -1,4 +1,5 @@
 import { Vector } from "./Vector";
+import { settings } from "./settings";
 import "./table.css";
 
 export class TableRenderer {
@@ -28,7 +29,7 @@ export class TableRenderer {
 
     constructor() {
         this.playfield = document.querySelector("#playfield")!;
-        this.createPlayfield(10, 10);
+        this.createPlayfield(settings.boardSize.x, settings.boardSize.y);
     }
 
     render(snake: Vector[], fruit: Vector[]) {

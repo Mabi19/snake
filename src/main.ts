@@ -1,13 +1,13 @@
 import "./style.css";
 import { TableRenderer } from "./Renderer";
 import { Vector } from "./Vector";
+import { settings } from "./settings";
 
 // TODO:
 // - grace move
 // - fruit
 // - dynamic game settings
 
-const TICK_LENGTH = 250;
 let lastTick = performance.now();
 
 const renderer = new TableRenderer();
@@ -41,7 +41,7 @@ function runTick() {
 function gameLoop() {
     const time = performance.now();
     const timeSinceLastTick = time - lastTick;
-    if (timeSinceLastTick >= TICK_LENGTH) {
+    if (timeSinceLastTick >= settings.tickLength) {
         lastTick = time;
         runTick();
     }

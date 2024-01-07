@@ -8,10 +8,6 @@ export class Vector {
         Object.freeze(this);
     }
 
-    clone() {
-        return new Vector(this.x, this.y);
-    }
-
     add(other: Vector) {
         return new Vector(this.x + other.x, this.y + other.y);
     }
