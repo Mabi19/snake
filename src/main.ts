@@ -4,7 +4,6 @@ import { Vector } from "./Vector";
 
 // TODO:
 // - grace move
-// - input buffering
 // - fruit
 // - dynamic game settings
 
@@ -15,15 +14,18 @@ const renderer = new TableRenderer();
 
 const snake = [new Vector(2, 0), new Vector(1, 0), new Vector(0, 0)];
 let direction = new Vector(0, 0);
-let newDirection = new Vector(0, 0);
+let directionBuffer: Vector[] = [];
 
 // initial render
 renderer.render(snake, []);
 
 function runTick() {
-    // if snake is not moving, skip
-    direction = newDirection;
+    // process inputs
+    if (directionBuffer.length > 0) {
+        direction = directionBuffer.shift()!;
+    }
 
+    // if snake is not moving, skip
     if (direction.x == 0 && direction.y == 0) {
         return;
     }
@@ -51,30 +53,39 @@ gameLoop();
 window.addEventListener("keydown", (ev) => {
     // write to newDirection to be able to check turnaround
     // with multiple inputs per tick
+    // (and input buffering)
+
+    // only allow buffering 1 input
+    if (directionBuffer.length >= 2) {
+        return;
+    }
+
+    const lastDir = directionBuffer.at(-1) ?? direction;
+
     switch (ev.key.toLowerCase()) {
         case "arrowleft":
         case "a":
-            if (direction.x != 1) {
-                newDirection = new Vector(-1, 0);
+            if (lastDir.x != 1) {
+                directionBuffer.push(new Vector(-1, 0));
             }
             break;
         case "arrowup":
         case "w":
-            if (direction.y != 1) {
-                newDirection = new Vector(0, -1);
+            if (lastDir.y != 1) {
+                directionBuffer.push(new Vector(0, -1));
             }
             break;
         case "arrowright":
         case "d":
-            if (direction.x != -1) {
-                newDirection = new Vector(1, 0);
+            if (lastDir.x != -1) {
+                directionBuffer.push(new Vector(1, 0));
                 break;
             }
             break;
         case "arrowdown":
         case "s":
-            if (direction.y != -1) {
-                newDirection = new Vector(0, 1);
+            if (lastDir.y != -1) {
+                directionBuffer.push(new Vector(0, 1));
             }
             break;
     }
