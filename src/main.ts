@@ -5,9 +5,6 @@ import { Game } from "./game";
 import { Controls } from "./controls";
 import { ConfettiContext } from "./ConfettiContext";
 
-// TODO:
-// - grace move
-
 let lastTick = performance.now();
 
 const controls = new Controls();
