@@ -7,7 +7,7 @@ import { Controls } from "./controls";
 // TODO:
 // - grace move
 // - customization: outside walls, fruit count, board size, tick speed
-// - scoring, high scores (yoink confetti effect)
+// - game over overlay (yoink confetti effect)
 
 let lastTick = performance.now();
 

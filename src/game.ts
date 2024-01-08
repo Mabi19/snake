@@ -10,12 +10,18 @@ export class Game {
     fruit: Vector[] = [];
     active = false;
 
+    score: number = 0;
+    highScore: number;
+    scoreElem = document.querySelector("#score")!;
+
     controls: Controls;
     renderer: TableRenderer;
 
     constructor(controls: Controls, renderer: TableRenderer) {
         this.controls = controls;
         this.renderer = renderer;
+
+        this.highScore = parseInt(localStorage.getItem("snake:high_score") ?? "0");
     }
 
     setup() {
@@ -24,6 +30,9 @@ export class Game {
         this.directionBuffer = [];
         this.fruit = [];
         this.spawnFruit();
+
+        this.score = 0;
+        this.drawScore();
 
         // initial render
         this.renderer.render(this.snake, this.fruit);
@@ -82,9 +91,16 @@ export class Game {
             // delete the fruit
             this.fruit = this.fruit.filter((pos) => !(pos.x == newHead.x && pos.y == newHead.y));
             this.spawnFruit();
+            // update score
+            this.score += 1;
+            this.drawScore();
         }
 
         this.renderer.render(this.snake, this.fruit);
+    }
+
+    private drawScore() {
+        this.scoreElem.textContent = `score: ${this.score} (high: ${this.highScore})`;
     }
 
     private spawnFruit() {
@@ -110,6 +126,12 @@ export class Game {
     private gameOver() {
         this.active = false;
         this.controls.setActive(!this.active);
+
+        if (this.score > this.highScore) {
+            this.highScore = this.score;
+            localStorage.setItem("snake:high_score", this.highScore.toString());
+            this.drawScore();
+        }
     }
 
     handleInput(ev: KeyboardEvent) {
