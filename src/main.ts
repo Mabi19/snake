@@ -1,9 +1,11 @@
 import "./style.css";
 import { TableRenderer } from "./Renderer";
 import { settings } from "./settings";
-import { handleInput, runTick, setup } from "./game";
+import { Game } from "./game";
+import { Controls } from "./controls";
 
 // TODO:
+// - show controls before starting
 // - collision
 // - grace move
 // - customization: outside walls, fruit count, board size, tick speed
@@ -11,22 +13,24 @@ import { handleInput, runTick, setup } from "./game";
 
 let lastTick = performance.now();
 
+const controls = new Controls();
 const renderer = new TableRenderer();
+const game = new Game(controls, renderer);
 
 function gameLoop() {
     const time = performance.now();
     const timeSinceLastTick = time - lastTick;
     if (timeSinceLastTick >= settings.tickLength) {
         lastTick = time;
-        runTick(renderer);
+        game.runTick();
     }
 
     requestAnimationFrame(gameLoop);
 }
 
 window.addEventListener("keydown", (ev) => {
-    handleInput(ev);
+    game.handleInput(ev);
 });
 
-setup(renderer);
+game.setup();
 gameLoop();

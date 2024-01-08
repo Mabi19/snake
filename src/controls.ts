@@ -13,5 +13,3 @@ export class Controls {
         }
     }
 }
-
-export const controls = new Controls();
