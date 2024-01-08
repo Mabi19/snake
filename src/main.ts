@@ -3,15 +3,18 @@ import { TableRenderer } from "./Renderer";
 import { settings } from "./settings";
 import { Game } from "./game";
 import { Controls } from "./controls";
+import { ConfettiContext } from "./ConfettiContext";
 
 // TODO:
 // - grace move
-// - game over overlay (yoink confetti effect)
 
 let lastTick = performance.now();
 
 const controls = new Controls();
 const renderer = new TableRenderer();
+const confetti = new ConfettiContext();
+confetti.spawnConfetti();
+
 const game = new Game(controls, renderer);
 
 function gameLoop() {
