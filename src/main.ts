@@ -13,9 +13,8 @@ let lastTick = performance.now();
 const controls = new Controls();
 const renderer = new TableRenderer();
 const confetti = new ConfettiContext();
-confetti.spawnConfetti();
 
-const game = new Game(controls, renderer);
+const game = new Game(controls, renderer, confetti);
 
 function gameLoop() {
     const time = performance.now();

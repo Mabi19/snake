@@ -1,3 +1,4 @@
+import { ConfettiContext } from "./ConfettiContext";
 import { TableRenderer } from "./Renderer";
 import { Vector, vectorInArray } from "./Vector";
 import { Controls } from "./controls";
@@ -16,10 +17,12 @@ export class Game {
 
     controls: Controls;
     renderer: TableRenderer;
+    confetti: ConfettiContext;
 
-    constructor(controls: Controls, renderer: TableRenderer) {
+    constructor(controls: Controls, renderer: TableRenderer, confetti: ConfettiContext) {
         this.controls = controls;
         this.renderer = renderer;
+        this.confetti = confetti;
 
         this.updateScoreSource();
     }
@@ -142,6 +145,7 @@ export class Game {
             this.highScore = this.score;
             localStorage.setItem(this.scoreDataName, this.highScore.toString());
             this.drawScore();
+            this.confetti.spawnConfetti();
         }
     }
 
