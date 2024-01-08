@@ -5,7 +5,6 @@ import { Game } from "./game";
 import { Controls } from "./controls";
 
 // TODO:
-// - side collision
 // - grace move
 // - customization: outside walls, fruit count, board size, tick speed
 // - scoring, high scores (yoink confetti effect)

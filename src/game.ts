@@ -49,7 +49,26 @@ export class Game {
         }
 
         // add head and remove tail
-        const newHead = this.snake[0].add(this.direction);
+        let newHead = this.snake[0].add(this.direction);
+
+        if (
+            newHead.x < 0 ||
+            newHead.y < 0 ||
+            newHead.x >= settings.boardSize.x ||
+            newHead.y >= settings.boardSize.y
+        ) {
+            // position is OoB
+            if (settings.collideWithWalls) {
+                this.gameOver();
+                return;
+            } else {
+                // teleport to the other side
+                newHead = new Vector(
+                    (newHead.x + settings.boardSize.x) % settings.boardSize.x,
+                    (newHead.y + settings.boardSize.y) % settings.boardSize.y
+                );
+            }
+        }
 
         if (vectorInArray(this.snake, newHead)) {
             this.gameOver();
