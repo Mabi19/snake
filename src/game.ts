@@ -35,6 +35,7 @@ export class Game {
         this.drawScore();
 
         // initial render
+        this.renderer.reset();
         this.renderer.render(this.snake, this.fruit);
 
         this.active = true;

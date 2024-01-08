@@ -19,6 +19,12 @@ body {
     align-items: center;
 }
 
+#controls > * {
+    display: block;
+    margin: auto;
+    text-align: center;
+}
+
 h1 {
     text-align: center;
 }

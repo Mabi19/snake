@@ -8,9 +8,12 @@ export class TableRenderer {
     lastSnake: Vector[] = [];
     lastFruit: Vector[] = [];
 
-    createPlayfield(width: number, height: number) {
+    createPlayfield() {
+        const { x: width, y: height } = settings.boardSize;
+
         this.playfield.replaceChildren();
         this.playfield.style.setProperty("--board-width", `${width}`);
+        this.cells = [];
 
         for (let y = 0; y < height; y++) {
             const rowElem = document.createElement("div");
@@ -29,7 +32,7 @@ export class TableRenderer {
 
     constructor() {
         this.playfield = document.querySelector("#playfield")!;
-        this.createPlayfield(settings.boardSize.x, settings.boardSize.y);
+        this.createPlayfield();
     }
 
     render(snake: Vector[], fruit: Vector[]) {
@@ -69,5 +72,15 @@ export class TableRenderer {
         this.lastSnake = snake.slice(0);
         console.assert(this.lastSnake != snake);
         this.lastFruit = fruit;
+    }
+
+    reset() {
+        this.lastSnake = [];
+        this.lastFruit = [];
+        for (const row of this.cells) {
+            for (const cell of row) {
+                cell.classList.remove("snake", "head", "fruit");
+            }
+        }
     }
 }

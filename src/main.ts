@@ -34,4 +34,7 @@ controls.setActive(true);
 controls.onstart = () => {
     game.setup();
 };
+controls.onupdatesize = () => {
+    renderer.createPlayfield();
+};
 gameLoop();

@@ -12,6 +12,33 @@
             <div id="playfield"></div>
             <div id="controls">
                 <button id="start">Start</button>
+                <div>
+                    <label for="tick-length">Speed</label>
+                    <select id="tick-length">
+                        <option value="slow">Slow</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="fast">Fast</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="board-size">Board size</label>
+                    <select id="board-size">
+                        <option value="tiny">Tiny (4x4)</option>
+                        <option value="small">Small (8x8)</option>
+                        <option value="medium" selected>Medium (12x12)</option>
+                        <option value="large">Large (15x15)</option>
+                        <option value="gigantic">Gigantic (25x25)</option>
+                        <option value="enormous">Enormous (40x40)</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="fruit-count">Fruit count</label>
+                    <input type="number" min="1" max="10" value="1" id="fruit-count" />
+                </div>
+                <div>
+                    <input type="checkbox" id="wall-collision" checked />
+                    <label for="wall-collision">Collide with outer walls</label>
+                </div>
             </div>
             <pre><code id="debug"></code></pre>
         </main>
