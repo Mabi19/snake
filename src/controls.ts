@@ -39,6 +39,7 @@ export class Controls {
     startButton: HTMLButtonElement = document.querySelector("#start")!;
     onstart = () => {};
     onupdatesize = () => {};
+    onupdate = () => {};
 
     constructor() {
         this.setActive(false);
@@ -47,18 +48,22 @@ export class Controls {
         select("#board-size", (v) => {
             settings.boardSize = BOARD_SIZE_MAP[v as keyof typeof BOARD_SIZE_MAP];
             this.onupdatesize();
+            this.onupdate();
         });
 
         select("#tick-length", (v) => {
             settings.tickLength = TICK_LENGTH_MAP[v as keyof typeof TICK_LENGTH_MAP];
+            this.onupdate();
         });
 
         numberField("#fruit-count", (v) => {
             settings.fruitCount = v;
+            this.onupdate();
         });
 
         checkbox("#wall-collision", (v) => {
             settings.collideWithWalls = v;
+            this.onupdate();
         });
     }
 

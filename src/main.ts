@@ -6,7 +6,6 @@ import { Controls } from "./controls";
 
 // TODO:
 // - grace move
-// - customization: outside walls, fruit count, board size, tick speed
 // - game over overlay (yoink confetti effect)
 
 let lastTick = performance.now();
@@ -37,4 +36,8 @@ controls.onstart = () => {
 controls.onupdatesize = () => {
     renderer.createPlayfield();
 };
+controls.onupdate = () => {
+    game.updateScoreSource();
+};
+
 gameLoop();

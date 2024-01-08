@@ -11,7 +11,7 @@ export class Game {
     active = false;
 
     score: number = 0;
-    highScore: number;
+    highScore: number = 0;
     scoreElem = document.querySelector("#score")!;
 
     controls: Controls;
@@ -21,7 +21,7 @@ export class Game {
         this.controls = controls;
         this.renderer = renderer;
 
-        this.highScore = parseInt(localStorage.getItem("snake:high_score") ?? "0");
+        this.updateScoreSource();
     }
 
     setup() {
@@ -100,6 +100,16 @@ export class Game {
         this.renderer.render(this.snake, this.fruit);
     }
 
+    updateScoreSource() {
+        this.score = 0;
+        this.highScore = parseInt(localStorage.getItem(this.scoreDataName) ?? "0");
+        this.drawScore();
+    }
+
+    get scoreDataName() {
+        return `snake:${JSON.stringify(settings)}:high_score`;
+    }
+
     private drawScore() {
         this.scoreElem.textContent = `score: ${this.score} (high: ${this.highScore})`;
     }
@@ -130,7 +140,7 @@ export class Game {
 
         if (this.score > this.highScore) {
             this.highScore = this.score;
-            localStorage.setItem("snake:high_score", this.highScore.toString());
+            localStorage.setItem(this.scoreDataName, this.highScore.toString());
             this.drawScore();
         }
     }
