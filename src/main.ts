@@ -5,8 +5,7 @@ import { Game } from "./game";
 import { Controls } from "./controls";
 
 // TODO:
-// - show controls before starting
-// - collision
+// - side collision
 // - grace move
 // - customization: outside walls, fruit count, board size, tick speed
 // - scoring, high scores (yoink confetti effect)
@@ -32,5 +31,8 @@ window.addEventListener("keydown", (ev) => {
     game.handleInput(ev);
 });
 
-game.setup();
+controls.setActive(true);
+controls.onstart = () => {
+    game.setup();
+};
 gameLoop();
