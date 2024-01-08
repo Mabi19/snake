@@ -188,7 +188,5 @@ export class Game {
                 }
                 break;
         }
-
-        document.querySelector("#debug")!.textContent = JSON.stringify(this.directionBuffer);
     }
 }
