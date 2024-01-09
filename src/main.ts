@@ -24,6 +24,15 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
+const fruitCounter = document.querySelector<HTMLInputElement>("#fruit-count")!;
+
+fruitCounter.addEventListener("input", () => {
+    if (fruitCounter.valueAsNumber <= 0) {
+        fruitCounter.valueAsNumber = 1;
+    }
+})
+
+
 window.addEventListener("keydown", (ev) => {
     game.handleInput(ev);
 });
